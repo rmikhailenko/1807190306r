@@ -1,43 +1,64 @@
 import React, {Component} from 'react'
 
 class CommentForm extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      name: 'Новый пользователь',
-      date: 'сегодня',
-      text: ''
+  state = {
+    comments: [],
+    form: {
+      name: '',
+      comment: ''
     }
-
-    this.onCommentAdd = this.onCommentAdd.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onSubmit (event) {
-    let parsState = JSON.stringify(this.state)
-    localStorage.setItem('comm', parsState)
-    event.preventDefault()
-  }
-  onCommentAdd (event) {
-    this.setState({text: event.target.value})
+  componentDidMount() {
+    if (localStorage.getItem('state')) {
+      this.setState({ ...JSON.parse(localStorage.getItem('state')) })
+    }
   }
 
-  // if someone reads this and doen't understand why
-  // the component sends a comment to localstorage and
-  // doesn’t do anything else, you should know that
-  // I didn’t have enough skills to render it back.
-  //  I know how to make a JSON.parse and request an object by key from the localstorege,
-  //   but I have no idea where to implement it
+  addComment = () => {
+    this.setState({
+      comments: [
+        ...this.state.comments,
+        {
+          id: this.state.comments.length ? this.state.comments.reduce((p, c) => p.id > c.id ? p : c).id + 1 : 1, // max id +1
+          name: this.state.form.name,
+          comment: this.state.form.comment,
+          date: new Date()
+        }
+      ],
+      form: {
+        name: '',
+        comment: ''
+      }
+    }, () => localStorage.setItem('state', JSON.stringify(this.state)))
+  }
 
-  render () {
+  handleChange = (e) => {
+    console.log(e.target.name)
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value,
+      }
+    })
+  }
+
+  render() {
     return (
       <section className='add-comment'>
+        {this.state.comments.map(comment => <div key={comment.id}>
+      <ul className='user-comments__list'>
+        <li className='user-comments__name'>Новый пользователь</li>
+        <li className='user-comments__date'>Сеодня</li>
+        <li className='user-comments__text'>{comment.comment}</li>
+      </ul>
+        </div>)}
         <div className='wrapper'>
-          <form onSubmit={this.onSubmit} className='comment-form'>
-            <textarea className='comment-form__input' name='comment-text' placeholder='' value={this.state.text} onChange={this.onCommentAdd} />
-            <input className='comment-form__submit' type='submit' value='Написать консультанту' />
+        <form className='comment-form'>
+          <textarea className='comment-form__input' name="comment" value={this.state.form.comment} onChange={this.handleChange} />
+          <input className='comment-form__submit' onClick={this.addComment} value='Написать консультанту' />
           </form>
-        </div>
+        </div>   
       </section>
     )
   }

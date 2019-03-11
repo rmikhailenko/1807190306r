@@ -174,7 +174,7 @@ body {
 
 .add-comment {
 	margin-top: 20px;
-	padding: 30px 0 35px;
+	/* padding: 30px 0 35px; */
 }
 
 .comment-form__input {
@@ -198,6 +198,7 @@ body {
 	display: block;
 	margin: 0 auto;
 	margin-top: 20px;
+	text-align: center;
 }
 
 /* media query */
