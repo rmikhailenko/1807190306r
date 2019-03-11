@@ -1,5 +1,14 @@
 body {
 	list-style-type: none;
+	margin:0px; 
+	padding:0px; 
+	font-family:Tahoma,Arial, sans-serif;
+	background-color:#FFFFFF; 
+	height:100%; 
+	position:relative; 
+	font-size:13px; 
+	-webkit-font-smoothing: antialiased;
+	 -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -107,7 +116,7 @@ body {
 
 .social-list {
 	float: right;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 .social-list__btn {
@@ -120,7 +129,7 @@ body {
 
 .social-list__img {
 	position: absolute;
-	margin: 5px 0 0 -20px;
+	margin: 0px 0 0 -20px;
 	height: 17px;
 	width: 17px;
 }
@@ -219,8 +228,8 @@ body {
 	}
 
 	.manager-profile__post {
-		margin-left: 0;
-		width: 100%;
+		margin-left: 5%;
+		width: 90%;
 		padding: 10px;
 		text-align: center;
 		font-size: 0.929em;
@@ -229,6 +238,11 @@ body {
 	.services-list {
 		margin: 0 auto;
 		margin-top: 10px;
+	}
+
+	.comments-info {
+		margin-left: 5%;
+
 	}
 
 }
@@ -240,4 +254,8 @@ body {
 		margin-top: -5px;
 		margin-left: 5px;
 	}
+	.comments-info {
+		margin-left: 5%;
+	}
+
 }
